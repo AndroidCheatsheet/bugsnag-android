@@ -5,7 +5,7 @@ RUN apt-get install -y gradle jq
 
 WORKDIR /sdk
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -q
-RUN unzip  -q sdk-tools-linux-4333796.zip
+RUN unzip -q sdk-tools-linux-4333796.zip
 
 ENV PATH="${PATH}:/sdk/tools:/sdk/tools/bin"
 
@@ -27,6 +27,8 @@ COPY bugsnag-plugin-react-native/ bugsnag-plugin-react-native/
 COPY examples/ examples/
 COPY mazerunner-scenarios/ mazerunner-scenarios/
 COPY scripts/ scripts/
+
+RUN echo Installing NDK_VERSION: $NDK_VERSION
 
 RUN scripts/install-ndk.sh
 

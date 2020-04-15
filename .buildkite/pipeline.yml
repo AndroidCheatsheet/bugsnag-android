@@ -17,6 +17,7 @@ steps:
   - wait
 
   - label: ':docker: Build Android jvm test image'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 40
     plugins:
       - docker-compose#v3.1.0:
@@ -37,6 +38,7 @@ steps:
     plugins:
       - docker-compose#v3.1.0:
           build: android-instrumentation-tests
+          image-repository: 855461928731.dkr.ecr.us-west-1.amazonaws.com/android
           cache-from:
             - android-instrumentation-tests:855461928731.dkr.ecr.us-west-1.amazonaws.com/android:android-${BRANCH_NAME}
             - android-instrumentation-tests:855461928731.dkr.ecr.us-west-1.amazonaws.com/android:android-latest
@@ -48,6 +50,7 @@ steps:
             - android-instrumentation-tests:855461928731.dkr.ecr.us-west-1.amazonaws.com/android:android-latest
 
   - label: ':docker: Build Android apk builder image'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 40
     plugins:
       - docker-compose#v3.1.0:
@@ -65,6 +68,7 @@ steps:
       MAVEN_VERSION: "3.6.1"
 
   - label: ':docker: Build Android maze runner image'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 20
     plugins:
       - docker-compose#v3.1.0:
@@ -73,6 +77,7 @@ steps:
   - wait
 
   - label: ':android: Linter'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 30
     plugins:
       - docker-compose#v3.1.0:
@@ -80,6 +85,7 @@ steps:
     command: 'bash ./scripts/run-linter.sh'
 
   - label: ':android: JVM tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 30
     plugins:
       - docker-compose#v3.1.0:
@@ -87,6 +93,7 @@ steps:
     command: './gradlew test'
 
   - label: ':android: Build fixture APK'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 30
     artifact_paths: build/fixture.apk
     plugins:
@@ -96,6 +103,7 @@ steps:
       MAVEN_VERSION: "3.6.1"
 
   - label: ':docker: Build Android sizer image'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 40
     plugins:
       - docker-compose#v3.1.0:
@@ -115,12 +123,14 @@ steps:
   - wait
 
   - label: ':android: Android size reporting'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 30
     plugins:
       - docker-compose#v3.1.0:
           run: android-sizer
 
   - label: ':android: Android 9 end-to-end tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 60
     plugins:
       artifacts#v1.2.0:
@@ -134,6 +144,7 @@ steps:
     concurrency_group: 'browserstack-app'
 
   - label: ':android: Android 10 end-to-end tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 60
     plugins:
         artifacts#v1.2.0:
@@ -160,7 +171,8 @@ steps:
     concurrency: 10
     concurrency_group: 'browserstack-app'
 
-  - block: "Trigger full test suite"
+  # skip: Debug NDK 12 failures
+  # - block: "Trigger full test suite"
 
   - label: ':android: Android 5 end-to-end tests'
     skip: Temporarily disabled due to flakiness with BrowserStack tunneling
@@ -177,6 +189,7 @@ steps:
     concurrency_group: 'browserstack-app'
 
   - label: ':android: Android 6 end-to-end tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 60
     plugins:
       artifacts#v1.2.0:
@@ -190,6 +203,7 @@ steps:
     concurrency_group: 'browserstack-app'
 
   - label: ':android: Android 7 end-to-end tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 60
     plugins:
       artifacts#v1.2.0:
@@ -203,6 +217,7 @@ steps:
     concurrency_group: 'browserstack-app'
 
   - label: ':android: Android 8.0 end-to-end tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 60
     plugins:
         artifacts#v1.2.0:
@@ -216,6 +231,7 @@ steps:
     concurrency_group: 'browserstack-app'
 
   - label: ':android: Android 8.1 end-to-end tests'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 60
     plugins:
       artifacts#v1.2.0:

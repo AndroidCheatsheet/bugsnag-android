@@ -5,6 +5,8 @@ if [ -z "$NDK_VERSION" ]; then
     export NDK_VERSION=r16b
 fi
 
+echo NDK_VERSION is $NDK_VERSION
+
 curl --silent -L https://dl.google.com/android/repository/android-ndk-$NDK_VERSION-linux-x86_64.zip -O
 
 unzip -qq android-ndk-$NDK_VERSION-linux-x86_64.zip > /dev/null
