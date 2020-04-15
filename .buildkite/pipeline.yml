@@ -1,5 +1,6 @@
 steps:
   - label: ':docker: Build Android base image'
+    skip: Debug NDK 12 failures
     timeout_in_minutes: 30
     plugins:
       - docker-compose#v3.1.0:
@@ -14,7 +15,7 @@ steps:
             - android-base:855461928731.dkr.ecr.us-west-1.amazonaws.com/android:android-${BRANCH_NAME}
             - android-base:855461928731.dkr.ecr.us-west-1.amazonaws.com/android:android-latest
 
-  - wait
+  #- wait
 
   - label: ':docker: Build Android jvm test image'
     skip: Debug NDK 12 failures

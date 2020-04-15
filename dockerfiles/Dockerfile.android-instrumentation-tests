@@ -28,9 +28,13 @@ COPY examples/ examples/
 COPY mazerunner-scenarios/ mazerunner-scenarios/
 COPY scripts/ scripts/
 
+ENV NDK_VERSION=r12b
 RUN echo Installing NDK_VERSION: $NDK_VERSION
 
 RUN scripts/install-ndk.sh
+
+RUN ls -R /sdk
+RUN ls -R /app
 
 ENV GRADLE_OPTS="-Dorg.gradle.daemon=false"
 
